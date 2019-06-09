@@ -1055,7 +1055,9 @@ void con_enable_fullscreen(Con *con, fullscreen_mode_t fullscreen_mode) {
         return;
     }
 
-    assert(fullscreen_mode == CF_GLOBAL || fullscreen_mode == CF_OUTPUT);
+    assert(fullscreen_mode == CF_GLOBAL
+        || fullscreen_mode == CF_OUTPUT
+        || fullscreen_mode == CF_TREE);
 
     if (fullscreen_mode == CF_GLOBAL)
         DLOG("enabling global fullscreen for %p / %s\n", con, con->name);
@@ -1676,7 +1678,7 @@ adjacent_t con_adjacent_borders(Con *con) {
  *
  */
 int con_border_style(Con *con) {
-    if (con->fullscreen_mode == CF_OUTPUT || con->fullscreen_mode == CF_GLOBAL) {
+    if (con->fullscreen_mode != CF_NONE) {
         DLOG("this one is fullscreen! overriding BS_NONE\n");
         return BS_NONE;
     }
@@ -2066,7 +2068,7 @@ bool con_fullscreen_permits_focusing(Con *con) {
 
     /* If fullscreen is per-output, the focus being in a different workspace is
      * sufficient to guarantee that change won't leave fullscreen in bad shape. */
-    if (fs->fullscreen_mode == CF_OUTPUT &&
+    if ((fs->fullscreen_mode == CF_OUTPUT || fs->fullscreen_mode == CF_TREE) &&
         con_get_workspace(con) != con_get_workspace(fs)) {
         return true;
     }

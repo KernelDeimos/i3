@@ -596,8 +596,9 @@ struct Assignment {
 
 /** Fullscreen modes. Used by Con.fullscreen_mode. */
 typedef enum { CF_NONE = 0,
-               CF_OUTPUT = 1,
-               CF_GLOBAL = 2 } fullscreen_mode_t;
+               CF_TREE = 1,
+               CF_OUTPUT = 2,
+               CF_GLOBAL = 3 } fullscreen_mode_t;
 
 struct mark_t {
     char *name;

@@ -77,6 +77,9 @@ void render_con(Con *con) {
     Con *fullscreen = NULL;
     if (con->type != CT_OUTPUT) {
         fullscreen = con_get_fullscreen_con(con, (con->type == CT_ROOT ? CF_GLOBAL : CF_OUTPUT));
+        if (fullscreen == NULL) {
+            fullscreen = con_get_fullscreen_con(con, (con->type == CT_ROOT ? CF_GLOBAL : CF_TREE));
+        }
     }
     if (fullscreen) {
         fullscreen->rect = params.rect;

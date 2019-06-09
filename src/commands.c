@@ -1389,7 +1389,10 @@ void cmd_focus(I3_CMD) {
  *
  */
 void cmd_fullscreen(I3_CMD, const char *action, const char *fullscreen_mode) {
-    fullscreen_mode_t mode = strcmp(fullscreen_mode, "global") == 0 ? CF_GLOBAL : CF_OUTPUT;
+    fullscreen_mode_t mode =
+        strcmp(fullscreen_mode, "global") == 0 ? CF_GLOBAL :
+        strcmp(fullscreen_mode, "tree") == 0 ? CF_TREE :
+        CF_OUTPUT;
     DLOG("%s fullscreen, mode = %s\n", action, fullscreen_mode);
     owindow *current;
 

@@ -166,7 +166,7 @@ state KILL:
   end
       -> call cmd_kill($kill_mode)
 
-# fullscreen enable|toggle [global]
+# fullscreen enable|toggle [global|tree]
 # fullscreen disable
 # fullscreen [global]
 state FULLSCREEN:
@@ -178,7 +178,7 @@ state FULLSCREEN:
       -> FULLSCREEN_COMPAT
 
 state FULLSCREEN_MODE:
-  mode = 'global'
+  mode = 'global', 'tree'
       -> call cmd_fullscreen($action, $mode)
   end
       -> call cmd_fullscreen($action, "output")
